@@ -1,3 +1,3 @@
 <section>
-    Gallery
+    <h1>Gallery</h1>
 </section>

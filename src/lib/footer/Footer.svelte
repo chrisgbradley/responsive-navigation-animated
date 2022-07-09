@@ -5,7 +5,6 @@
 
 <style>
     footer {
-        width:100%;
-        background: var(--primary-color);
+        text-align: center;
     }
 </style>

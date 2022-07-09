@@ -31,10 +31,6 @@
         background: none;
     }
 
-	.mobile-menu-open header .shadow::before {
-		transform: scale(1000);
-	}
-
 	.logo {
 		padding: 10px 20px;
 	}
@@ -128,6 +124,10 @@
 		.nav-links {
 			position: relative;
 			flex-direction: row;
+			top:auto;
+			right:auto;
+			width:auto;
+			height:auto;
 		}
 
 		.nav-links li a {
