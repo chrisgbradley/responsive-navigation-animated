@@ -1,45 +1,48 @@
 <script lang="ts">
 	import Header from '$lib/header/Header.svelte';
+	import Footer from '$lib/footer/Footer.svelte';
 	import '../app.css';
+
+	let isMenuOpen: boolean = false;
+	$: document.body.classList[isMenuOpen ? 'add' : 'remove']('mobile-menu-open');
+	const handleMenuButtonClick = () => { isMenuOpen = !isMenuOpen;}
 </script>
 
-<Header />
-
-<main>
-	<slot />
-</main>
-
-<footer>
-	<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
-</footer>
+<div class="shadow" class:open={isMenuOpen}></div>
+<Header {handleMenuButtonClick} />
+<div class="page" class:mobile-menu-open={isMenuOpen}>
+	
+	<main>
+		<slot />
+	</main>
+	
+</div>
+<Footer />
 
 <style>
-	main {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		padding: 1rem;
-		width: 100%;
-		max-width: 1024px;
-		margin: 0 auto;
-		box-sizing: border-box;
+	.page {
+		flex-grow: 1;
+		z-index: 20;
+		width:100%;
+		margin:0;
+		transition: all 0.3s ease-in;
+		transform-origin: left center;
 	}
 
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 40px;
+	.mobile-menu-open.page {
+		transform: scale(.85) translateX(-300px);
 	}
 
-	footer a {
-		font-weight: bold;
+	.shadow {
+		position:absolute;
+		height:100vh;
+		width:100vw;
+		background: var(--pure-white);
+		transform-origin: left center;
+		transition: all 0.3s ease-in;
 	}
 
-	@media (min-width: 480px) {
-		footer {
-			padding: 40px 0;
-		}
+	.shadow.open {
+		transform: scale(.85) translateX(-300px);
 	}
 </style>

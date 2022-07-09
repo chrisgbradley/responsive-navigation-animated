@@ -1,3 +1,3 @@
 <section>
-    <h1>About</h1>
+    Contact
 </section>

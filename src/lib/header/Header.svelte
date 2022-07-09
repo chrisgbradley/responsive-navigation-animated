@@ -1,124 +1,140 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import logo from './svelte-logo.svg';
+	export let handleMenuButtonClick: svelte.JSX.MouseEventHandler<HTMLButtonElement>;
 </script>
 
-<header>
-	<div class="corner">
-		<a href="https://kit.svelte.dev">
-			<img src={logo} alt="SvelteKit" />
-		</a>
-	</div>
+<header class="test">
+	<a class="logo" href="">logo</a>
 
-	<nav>
-		<svg viewBox="0 0 2 3" aria-hidden="true">
-			<path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
-		</svg>
-		<ul>
-			<li class:active={$page.url.pathname === '/'}><a sveltekit:prefetch href="/">Home</a></li>
-			<li class:active={$page.url.pathname === '/about'}>
-				<a sveltekit:prefetch href="/about">About</a>
-			</li>
-			<li class:active={$page.url.pathname === '/todos'}>
-				<a sveltekit:prefetch href="/todos">Todos</a>
-			</li>
-		</ul>
-		<svg viewBox="0 0 2 3" aria-hidden="true">
-			<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
-		</svg>
-	</nav>
+	<button class="menu-toggle" on:click={handleMenuButtonClick}>
+		<span class="line"></span>
+	</button>
 
-	<div class="corner">
-		<!-- TODO put something else here? github link? -->
-	</div>
+	<ul class="nav-links">
+		<li><a href="/">home</a></li>
+		<li><a href="/about">about</a></li>
+		<li><a href="/gallery">gallery</a></li>
+		<li><a href="/contact">contact</a></li>
+	</ul>
 </header>
 
 <style>
-	header {
+    header {
+		position: relative;
 		display: flex;
+		flex-direction: row;
 		justify-content: space-between;
-	}
-
-	.corner {
-		width: 3em;
-		height: 3em;
-	}
-
-	.corner a {
-		display: flex;
 		align-items: center;
-		justify-content: center;
-		width: 100%;
-		height: 100%;
+        width:100%;
+		max-width: 1280px;
+		margin: 0 auto;
+		height: 60px;
+        background: none;
+    }
+
+	.mobile-menu-open header .shadow::before {
+		transform: scale(1000);
 	}
 
-	.corner img {
-		width: 2em;
-		height: 2em;
-		object-fit: contain;
+	.logo {
+		padding: 10px 20px;
 	}
 
-	nav {
-		display: flex;
-		justify-content: center;
-		--background: rgba(255, 255, 255, 0.7);
-	}
-
-	svg {
-		width: 2em;
-		height: 3em;
-		display: block;
-	}
-
-	path {
-		fill: var(--background);
-	}
-
-	ul {
+	.menu-toggle {
 		position: relative;
-		padding: 0;
-		margin: 0;
-		height: 3em;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		list-style: none;
-		background: var(--background);
-		background-size: contain;
+		border: transparent;
+		background: none;
+		height: 60px;
+		width: 60px;
+		cursor: pointer;
 	}
 
-	li {
-		position: relative;
-		height: 100%;
-	}
-
-	li.active::before {
-		--size: 6px;
-		content: '';
-		width: 0;
-		height: 0;
+	.menu-toggle .line {
+		display:block;
 		position: absolute;
-		top: 0;
-		left: calc(50% - var(--size));
-		border: var(--size) solid transparent;
-		border-top: var(--size) solid var(--accent-color);
+		box-sizing: border-box;
+		z-index:30;
+		height:25px;
+		width:30px;
+		top: 17px;
+		left: 17px;
+		border-top:2px solid var(--accent-color);
+		transition: all 0.3s ease-in
+	}
+	.menu-toggle .line::before {
+		content: "";
+		display:block;
+		position:absolute;
+		height:2px;
+		width:30px;
+		top: 10px;
+		left: 0;
+		background: var(--accent-color);
+		transition: all 0.3s ease-in
+	}
+	.menu-toggle .line::after {
+		content: "";
+		display:block;
+		position:absolute;
+		height:2px;
+		width:30px;
+		bottom: 0;
+		left: 0;
+		background: var(--accent-color);
+		transition: all 0.3s ease-in
 	}
 
-	nav a {
+
+	.mobile-menu-open * .menu-toggle {
+		position: sticky;
+		top:0;
+		right:0;
+	}
+
+	.mobile-menu-open * .menu-toggle .line {
+		border-color: transparent;
+	}
+	.mobile-menu-open * .menu-toggle .line::before {
+		transform: rotate(45deg);
+		width: 33px;
+		left: -2px;
+	}
+	.mobile-menu-open * .menu-toggle .line::after {
+		transform: rotate(135deg);
+		width: 33px;
+		bottom: 11px;
+		left: -2px;
+	}
+
+	.nav-links {
+		position: absolute;
 		display: flex;
+		flex-direction: column;
+		list-style: none;
+		width:200px;
 		height: 100%;
-		align-items: center;
-		padding: 0 1em;
-		color: var(--heading-color);
-		font-weight: 700;
-		font-size: 0.8rem;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		text-decoration: none;
-		transition: color 0.2s linear;
+		top: 60px;
+		right:-200px;
+		transition: all 0.3s ease-in;
+	}
+	.mobile-menu-open * .nav-links {
+		transform: translate(-200px);
 	}
 
-	a:hover {
-		color: var(--accent-color);
+	.nav-links li {
+		padding: 10px 30px;
+	}
+
+	@media (min-width: 640px) {
+		.nav-links {
+			position: relative;
+			flex-direction: row;
+		}
+
+		.nav-links li a {
+			padding: 10px 20px;
+		}
+		.menu-toggle {
+			display: none;
+		}
 	}
 </style>

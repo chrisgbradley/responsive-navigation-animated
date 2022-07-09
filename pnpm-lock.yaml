@@ -11,6 +11,7 @@ specifiers:
   eslint: ^8.16.0
   eslint-config-prettier: ^8.3.0
   eslint-plugin-svelte3: ^4.0.0
+  normalize.css: ^8.0.1
   prettier: ^2.6.2
   prettier-plugin-svelte: ^2.7.0
   svelte: ^3.46.0
@@ -23,6 +24,7 @@ specifiers:
 dependencies:
   '@fontsource/fira-mono': 4.5.8
   cookie: 0.4.2
+  normalize.css: 8.0.1
 
 devDependencies:
   '@sveltejs/adapter-auto': 1.0.0-next.55
@@ -1407,6 +1409,10 @@ packages:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /normalize.css/8.0.1:
+    resolution: {integrity: sha512-qizSNPO93t1YUuUhP22btGOo3chcvDFqFaj2TRybP0DMxkHOCTYwp3n34fel4a31ORXy4m1Xq0Gyqpb5m33qIg==}
+    dev: false
 
   /npmlog/5.0.1:
     resolution: {integrity: sha512-AqZtDUWOMKs1G/8lwylVjrdYgqA4d9nu8hc+0gzRxlDb1I10+FHBGMXs6aiQHFdCUUlqH99MUMuLfzWDNDtfxw==}
